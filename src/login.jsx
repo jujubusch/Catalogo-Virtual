@@ -1,30 +1,8 @@
-import { Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+/* Os imports são utilizados para chamar as funções mais importantes utilizadas */
+import { Alert, Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import React from 'react'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
-
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-    primary: {
-      main: '#ff5252',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-    background: {
-      default: '#e5acff',
-      paper: '#cafbfb',
-    },
-    text: {
-      primary: 'rgba(0,0,0,0.87)',
-      secondary: '#fd0128',
-      disabled: '#fd0531',
-      hint: '#000000',
-    },
-    }
-});
 
 function Login() {
 
@@ -35,6 +13,7 @@ function Login() {
     const [ erro, setErro ] = useState( false );
     const navigate = useNavigate();
 
+/* No useEffect é utilizado para toda vez que o sistema for atualizado no sistema*/
     useEffect( () => {
 
         if( login ) {
@@ -49,7 +28,7 @@ function Login() {
 function Autenticar( evento )
 {
     evento.preventDefault();
-    fetch( "https://api.escuelajs.co/api/v1/auth/login", {
+    fetch( "http://10.139.75.32:8080/login", {
         method:"POST",
         headers: {
             'Content-Type': 'application/json'
@@ -57,17 +36,17 @@ function Autenticar( evento )
         body: JSON.stringify(
             {
                 email: email,
-                password: senha
+                senha: senha
             }
         ) 
     } )
     .then( (resposta) => resposta.json() )
     .then( (json) => { 
 
-        if( json.statusCode === 401 ) {
-            setErro( true );
-        } else {
+        if( json.user ) {
             setLogin( true );
+        } else {
+            setErro( true );
         }
     } )
     .catch( ( erro ) => { setErro( true ) } )
@@ -75,7 +54,6 @@ function Autenticar( evento )
 }
 
   return (
-    <ThemeProvider theme={theme}>
         <Container component="section" maxWidth="xs">
         <Box
         sx={{
@@ -89,6 +67,7 @@ function Autenticar( evento )
         }}
         >
             <Typography component="h1" variant='h4'>Entrar</Typography>
+            { erro && ( <Alert severity="warning">Revise seus dados e tente novamente</Alert> ) }
             <Box component="form" onSubmit={Autenticar}>
                 <TextField 
                 type="Email" 
@@ -101,7 +80,7 @@ function Autenticar( evento )
                 <TextField 
                 type="password" 
                 label="Senha" 
-                variant="filled" 
+                variant="filled"
                 margin="normal"
                 value={senha}
                 onChange={ (e) => setSenha( e.target.value ) }
@@ -122,7 +101,6 @@ function Autenticar( evento )
             </Box>
         </Box>    
         </Container>
-    </ThemeProvider>
   )
 }
 
