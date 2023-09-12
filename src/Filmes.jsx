@@ -16,7 +16,7 @@ function Filmes() {
     function CadastrarFilmes( evento ) {
 
         evento.preventDefault();
-        fetch( "http://10.139.75.32:8080/filmes", {
+        fetch( process.env.REACT_APP_BACKEND + "filmes", {
         method:"POST",
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ function Filmes() {
     .then( (resposta) => resposta.json() )
     .then( (json) => { 
         
-        if( json.filme ) {
+        if( json._id ) {
             setCadastroFilmes( true );
             setErro( false )
         } else {
@@ -57,7 +57,6 @@ function Filmes() {
         setDuracao( "" );
         setCategoria( "" );
         setImagem( "" );
-        setCadastroFilmes( false );
 
     }, [ cadastrofilmes ] );
 
@@ -67,66 +66,71 @@ function Filmes() {
             mt: 10,
             backgroundColor: "#F4C3D8",
             padding: "50px",
-            borderRadius: "10px",
+            borderRadius: "20px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center"
     }}>
-        <Typography component="h1" variant='h4'>Cadastrar Filme</Typography>
-
-        { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> ) }
-        { cadastrofilmes && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Obrigada por cadastrar o filme.</Alert> ) }
-
+       
+        <Typography component="h1" variant='h4'>Cadastrar Filme</Typography>   
+        { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Filme já cadastrado, Tente novamnte por favor!</Alert> ) }
+        { cadastrofilmes && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Obrigada por cadastrar o seu filme!</Alert> ) }
         <Box component="form" onSubmit={CadastrarFilmes}>
         <TextField
             type="text"
-            label="Título*" 
+            label="Título" 
             variant="filled" 
             margin="normal" 
             value={titulo}
             onChange={ (e) => setTitulo( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             <TextField 
             type="text"
-            label="Descrição*" 
+            label="Descrição" 
             variant="filled" 
             margin="normal" 
             value={descricao}
             onChange={ (e) => setDescricao( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             <TextField 
             type="date"
-            label="Ano*" 
+            label="Ano" 
             variant="filled" 
             margin="normal" 
             value={ano}
             onChange={ (e) => setAno( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             
             <TextField 
             type="time"
-            label="Duração( em horas )*" 
+            label="Duração( em horas )" 
             variant="filled" 
             margin="normal" 
             value={duracao}
             onChange={ (e) => setDuracao( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             <TextField 
             type="text"
-            label="Categoria*" 
+            label="Categoria" 
             variant="filled" 
             margin="normal" 
             value={categoria}
             onChange={ (e) => setCategoria( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             <TextField 
             type="text"
-            label="Capa do Filme*" 
+            label="Capa do Filme" 
             variant="filled" 
             margin="normal" 
             value={imagem}
             onChange={ (e) => setImagem( e.target.value ) }
-            fullWidth/>
+            fullWidth
+            />
             <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Enviar</Button>
         </Box>
     </Box>
