@@ -123,15 +123,15 @@ function Filmes() {
             fullWidth
             />
             <TextField 
-            type="text"
-            label="Capa do Filme" 
+            type="url"
+            label="Url do Filme" 
             variant="filled" 
             margin="normal" 
             value={imagem}
             onChange={ (e) => setImagem( e.target.value ) }
             fullWidth
             />
-            <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Enviar</Button>
+            <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Editar</Button>
         </Box>
     </Box>
    </Container>
