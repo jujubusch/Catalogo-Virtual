@@ -1,11 +1,10 @@
-/* Os imports são utilizados para chamar as funções mais importantes utilizadas */
 import { Alert, Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
 
-function Login() {
-
+function Login(){
+    
     const [ email, setEmail ] = useState( "" );
     const [ senha, setSenha ] = useState( "" );
     const [ lembrar, setLembrar ] = useState( false );
@@ -58,7 +57,7 @@ function Autenticar( evento )
         <Box
         sx={{
             mt: 10,
-            backgroundColor: "#BDD7FC",
+            backgroundColor: "#E1FFF4",
             padding: "50px",
             borderRadius: "10px",
             display: "flex",
@@ -66,12 +65,12 @@ function Autenticar( evento )
             alignItems: "center"
         }}
         >
-            <Typography component="h1" variant='h4'>Entrar</Typography>
-            { erro && ( <Alert severity="warning">Revise seus dados e tente novamente</Alert> ) }
+            <Typography component="h1" variant='h4'>Login</Typography>
+            { erro && ( <Alert severity="warning">Email ou senha errado, Tente Novamente!</Alert> ) }
             <Box component="form" onSubmit={Autenticar}>
                 <TextField 
                 type="Email" 
-                label="Email" 
+                label="Email*" 
                 variant="filled" 
                 margin="normal" 
                 value={email}
@@ -79,7 +78,7 @@ function Autenticar( evento )
                 fullWidth/>
                 <TextField 
                 type="password" 
-                label="Senha" 
+                label="Senha*" 
                 variant="filled"
                 margin="normal"
                 value={senha}
@@ -89,7 +88,7 @@ function Autenticar( evento )
                     control={ <Checkbox value="lembrar" name="lembrar" onChange={ (e) => setLembrar( !lembrar ) } />}
                     label="Lembrar-me"
                 />
-                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Login</Button>
+                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Entrar</Button>
                 <Grid container>
                     <Grid item xs>
                         Esqueci a senha
@@ -104,4 +103,4 @@ function Autenticar( evento )
   )
 }
 
-export default Login
+export default Login;

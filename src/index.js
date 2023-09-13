@@ -7,23 +7,24 @@ import Cadastro from "./Cadastro"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Filmes from './Filmes';
 import EditaFilme from './EditaFilme';
+import { red } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
       mode: 'light',
   primary: {
-    main: '#8A01E1',
+    main: '#ffa8e5',
   },
   secondary: {
     main: '#f50057',
   },
   background: {
-    default: '#8A01E1',
-    paper: '#cafbfb',
+    default: '#FEB8B8',
+    paper: '#E1FFF4',
   },
   text: {
-    primary: 'rgba(0,0,0,0.87)',
-    secondary: '#AB11F7',
+    primary: '#ffa8e5',
+    secondary: '#000000',
     disabled: '#fd0531',
     hint: '#000000',
   },

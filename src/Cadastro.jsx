@@ -62,7 +62,7 @@ function Cadastro() {
         <Container component="section" maxWidth="sm">
             <Box sx={{
                 mt: 10,
-                backgroundColor: "#F4C3D8",
+                backgroundColor: "#E1FFF4",
                 padding: "50px",
                 borderRadius: "10px",
                 display: "flex",
@@ -115,7 +115,7 @@ function Cadastro() {
                 value={cpf}
                 onChange={ (e) => setCpf( e.target.value ) }
                 fullWidth/>
-                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Cadastrar</Button>
+                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Enviar</Button>
             </Box>
         </Box>
         </Container>

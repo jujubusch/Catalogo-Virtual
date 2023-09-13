@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
-import Filme from "./components/Filme"
+import Menu from "./components/Menu"
 import { Container } from "@mui/material";
 
 function App() {
 
-  const[ filmes, setFilmes ] = useState();
+  const[ menu, setMenu ] = useState();
   const[ erro, setErro ] = useState();
 
 
   useEffect( () => {
 
-    fetch( process.env.REACT_APP_BACKEND + "filmes", {
+    fetch( process.env.REACT_APP_BACKEND + "menus", {
       headers: {
         "Content-Type": "application/json"
       }
     } )
     .then( ( resposta) => resposta.json() )
-    .then( ( json ) => setFilmes( json ) )
+    .then( ( json ) => setMenu( json ) )
     .catch( ( erro ) => setErro( true ) )
 
   }, [] )
 
 function Excluir( evento, id ) {
   evento.preventDefault();
-    fetch( process.env.REACT_APP_BACKEND + "filmes", {
+    fetch( process.env.REACT_APP_BACKEND + "menus", {
         method:"DELETE",
         headers: {
             'Content-Type': 'application/json'
@@ -34,8 +34,8 @@ function Excluir( evento, id ) {
     } )
     .then( (resposta) => resposta.json() )
     .then( (json) => { 
-      const novaLista = filmes.filter( ( filme ) => filme._id !== id );
-      setFilmes( novaLista );
+      const novaLista = menu.filter( ( menu ) => menu._id !== id );
+      setMenu( novaLista );
     } )
     .catch( ( erro ) => { setErro( true ) } )
 }
