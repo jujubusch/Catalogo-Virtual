@@ -57,7 +57,7 @@ function Autenticar( evento )
         <Box
         sx={{
             mt: 10,
-            backgroundColor: "#E1FFF4",
+            backgroundColor: "#b3e5fc",
             padding: "50px",
             borderRadius: "10px",
             display: "flex",
@@ -93,9 +93,7 @@ function Autenticar( evento )
                     <Grid item xs>
                         Esqueci a senha
                     </Grid>
-                    <Grid item>
-                        Cadastrar
-                    </Grid>
+                    <Button href='cadastro' >Cadastrar</Button>
                 </Grid>
             </Box>
         </Box>    

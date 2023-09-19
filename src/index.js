@@ -5,28 +5,33 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from "./login"
 import Cadastro from "./Cadastro"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Filmes from './Filmes';
-import EditaFilme from './EditaFilme';
-import { red } from '@mui/material/colors';
+import EditaProdutos from './EditarProduto';
+import CadastroProdutos from './CadastroProdutos';
+import MenuResponsivo from './MenuResponsivo';
+import Menu from "./components/Menu";
+
 
 const theme = createTheme({
   palette: {
       mode: 'light',
   primary: {
-    main: '#ffa8e5',
+    main: '#000000',
   },
   secondary: {
     main: '#f50057',
   },
   background: {
-    default: '#FEB8B8',
-    paper: '#E1FFF4',
+    default: '#f8bbd0',
+    paper: '#fae3ff',
   },
   text: {
-    primary: '#ffa8e5',
+    primary: 'rgba(0,0,0,0.87)',
     secondary: '#000000',
     disabled: '#fd0531',
     hint: '#000000',
+  },
+  shape: {
+    borderRadius: 15,
   },
   }
 });
@@ -45,12 +50,20 @@ const router = createBrowserRouter([
     element: <Cadastro />
   },
   {
-    path: "/filmes",
-    element: <Filmes />
+    path: "/editar",
+    element: <EditaProdutos />
   },
   {
-    path: "/edicao/:id",
-    element: <EditaFilme />
+    path: "/produtos",
+    element: <CadastroProdutos />
+  },
+  {
+    path: "/menuResponsivo",
+    element: <MenuResponsivo />
+  },
+  {
+    path: "/menu",
+    element: <Menu />
   }
 ]);
 

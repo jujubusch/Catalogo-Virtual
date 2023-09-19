@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import Menu from "./components/Menu"
 import { Container } from "@mui/material";
+import MenuResponsivo from "./MenuResponsivo";
+import "./global.css";
+
 
 function App() {
 
   const[ menu, setMenu ] = useState();
   const[ erro, setErro ] = useState();
+  const[ filmes, setFilmes] =useState();
 
 
   useEffect( () => {
@@ -42,27 +46,15 @@ function Excluir( evento, id ) {
 
   return (
     <>
-    <h1>Filmes</h1>
+    <MenuResponsivo />
+    <h1 className="titulo" >Catálogo dos produtos</h1>
     <Container sx={{
         display: "flex",
         flexFlow: "row",
         flexWrap: "wrap", 
         gap: "2rem"
     }}>
-      { filmes && (
-      filmes.map( (filme, index ) => (
-        <Filme 
-        imagem={filme.imagem}
-        titulo={filme.titulo}
-        descricao={filme.descricao}
-        categoria={filme.categoria}
-        ano={filme.ano}
-        duracao={filme.duracao}
-        excluir={ (e) => Excluir( e, filme._id ) }
-        id={filme._id}
-        />
-      ))
-    )}
+      
     </Container>
     </>
   );

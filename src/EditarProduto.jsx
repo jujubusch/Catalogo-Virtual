@@ -1,22 +1,21 @@
-import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography,Rating } from '@mui/material';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
-function EditaFilmes() {
+function EditaProdutos() {
 
     const { id } = useParams();
-    const [titulo, setTitulo] = useState("");
+    const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [ano, setAno] = useState("");
-    const [duracao, setDuracao] = useState("");
-    const [categoria, setCategoria] = useState("");
+    const [tipo, setTipo] = useState("");
+    const [colecao, setColecao] = useState("");
     const [imagem, setImagem] = useState("");
     const [erro, setErro] = useState(false);
-    const [editarfilmes, setEditarFilmes] = useState(false);
+    const [editarProdutos, setEditarProdutos] = useState(false);
 
     useEffect( () => {
-        fetch( process.env.REACT_APP_BACKEND + "filmes/" + id, {
+        fetch( process.env.REACT_APP_BACKEND + "editar/" + id, {
             method:"GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -26,14 +25,13 @@ function EditaFilmes() {
         .then( (json) => { 
 
             if( !json.status ) {
-                setTitulo( json.titulo );
+                setNome( json.nome );
                 setDescricao( json.descricao );
-                setAno( json.ano );
-                setDuracao( json.duracao );
-                setCategoria( json.categoria );
+                setTipo( json.tipo );
+                setColecao( json.colecao );
                 setImagem( json.imagem );
             } else {
-                setErro( "Filme não Encontrado" );
+                setErro( "Produto não Encontrado" );
             }
         })
         .catch( ( erro ) => { setErro( true ) } )
@@ -41,7 +39,7 @@ function EditaFilmes() {
 
     function Editar( evento ) {
         evento.preventDefault();
-        fetch( process.env.REACT_APP_BACKEND + "filmes", {
+        fetch( process.env.REACT_APP_BACKEND + "editar", {
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -49,11 +47,10 @@ function EditaFilmes() {
             body: JSON.stringify(
                 {
                     id: id,
-                    titulo: titulo,
+                    nome: nome,
                     descricao: descricao,
-                    ano: ano,
-                    duracao: duracao,
-                    categoria: categoria,
+                    tipo: tipo,
+                    colecao: colecao,
                     imagem: imagem                    
                 }
             ) 
@@ -62,22 +59,22 @@ function EditaFilmes() {
         .then( (json) => { 
             
             if( json._id ) {
-                setEditarFilmes( true );
+                setEditarProdutos( true );
                 setErro( false )
             } else {
                 setErro( true );
-                setEditarFilmes( "Filme Não encontrado!" );
+                setEditarProdutos( "Produto Não encontrado!" );
             }
             
         } )
-        .catch( ( erro ) => { setErro( "Filme Não encontrado!" ) } )
+        .catch( ( erro ) => { setErro( "Produto Não encontrado!" ) } )
     }
 
     return (
         <Container component="section" maxWidth="sm">
             <Box sx={{
                 mt: 10,
-                backgroundColor: "#F4C3D8",
+                backgroundColor: "#b3e5fc",
                 padding: "50px",
                 borderRadius: "20px",
                 display: "flex",
@@ -85,17 +82,17 @@ function EditaFilmes() {
                 alignItems: "center"
             }}>
 
-                <Typography component="h1" variant='h4'>Editar Filme</Typography>
+                <Typography component="h1" variant='h4'>Editar Produto</Typography>
                 { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >{erro}</Alert> ) }
-                { editarfilmes && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Filme Editado com Sucesso!</Alert> ) }
+                { editarProdutos && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Produto Editado com Sucesso!</Alert> ) }
                 <Box component="form" onSubmit={Editar}> 
                     <TextField
                         type="text"
-                        label="Título"
+                        label="Nome"
                         variant="filled"
                         margin="normal"
-                        value={titulo}
-                        onChange={(e) => setTitulo(e.target.value)}
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
                         fullWidth
                     />
                     <TextField
@@ -107,32 +104,30 @@ function EditaFilmes() {
                         onChange={(e) => setDescricao(e.target.value)}
                         fullWidth
                     />
-                    <TextField
-                        type="year"
-                        label="Ano"
-                        variant="filled"
-                        margin="normal"
-                        value={ano}
-                        onChange={(e) => setAno(e.target.value)}
-                        fullWidth
-                    />
+                        <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Tipos</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={tipo}
+                            label="Age"
+                        >
+                        <MenuItem value={1}>Brilho Labial</MenuItem>
+                        <MenuItem value={2}>Blush</MenuItem>
+                        <MenuItem value={3}>Sombra</MenuItem>
+                        <MenuItem value={3}>Delineador</MenuItem>
+                        <MenuItem value={3}>Primer</MenuItem>
+                        <MenuItem value={3}>Outros...</MenuItem>
+                    </Select>
+                    </FormControl>
 
                     <TextField
                         type="text"
-                        label="Duração( em horas )"
+                        label="Coleção"
                         variant="filled"
                         margin="normal"
-                        value={duracao}
-                        onChange={(e) => setDuracao(e.target.value)}
-                        fullWidth
-                    />
-                    <TextField
-                        type="text"
-                        label="Categoria"
-                        variant="filled"
-                        margin="normal"
-                        value={categoria}
-                        onChange={(e) => setCategoria(e.target.value)}
+                        value={colecao}
+                        onChange={(e) => setColecao(e.target.value)}
                         fullWidth
                     />
                     <TextField
@@ -151,4 +146,4 @@ function EditaFilmes() {
     )
 }
 
-export default EditaFilmes;
+export default EditaProdutos;

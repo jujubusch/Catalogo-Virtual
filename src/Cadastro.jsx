@@ -62,7 +62,7 @@ function Cadastro() {
         <Container component="section" maxWidth="sm">
             <Box sx={{
                 mt: 10,
-                backgroundColor: "#E1FFF4",
+                backgroundColor: "#b3e5fc",
                 padding: "50px",
                 borderRadius: "10px",
                 display: "flex",
@@ -72,7 +72,7 @@ function Cadastro() {
             <Typography component="h1" variant='h4'>Cadastrar</Typography>
 
             { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }} >Desculpe tente novamente</Alert> ) }
-            { cadastro && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Obrigada por se cadastrar</Alert> ) }
+            { cadastro && ( <Alert severity="success" sx={{ mt: 2, mb: 2 }} >Obrigada por se cadastrar!</Alert> ) }
 
             <Box component="form" onSubmit={Cadastrar}>
                 <TextField 
