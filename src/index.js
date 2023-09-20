@@ -7,8 +7,6 @@ import Cadastro from "./Cadastro"
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import EditaProdutos from './EditarProduto';
 import CadastroProdutos from './CadastroProdutos';
-import MenuResponsivo from './MenuResponsivo';
-import Menu from "./components/Menu";
 
 
 const theme = createTheme({
@@ -16,6 +14,7 @@ const theme = createTheme({
       mode: 'light',
   primary: {
     main: '#000000',
+    contrastText: '#ffffff',
   },
   secondary: {
     main: '#f50057',
@@ -27,7 +26,7 @@ const theme = createTheme({
   text: {
     primary: 'rgba(0,0,0,0.87)',
     secondary: '#000000',
-    disabled: '#fd0531',
+    disabled: '#000000',
     hint: '#000000',
   },
   shape: {
@@ -50,20 +49,12 @@ const router = createBrowserRouter([
     element: <Cadastro />
   },
   {
-    path: "/editar",
+    path: "/editar/:id",
     element: <EditaProdutos />
   },
   {
     path: "/produtos",
     element: <CadastroProdutos />
-  },
-  {
-    path: "/menuResponsivo",
-    element: <MenuResponsivo />
-  },
-  {
-    path: "/menu",
-    element: <Menu />
   }
 ]);
 

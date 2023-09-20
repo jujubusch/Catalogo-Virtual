@@ -12,11 +12,9 @@ function Login(){
     const [ erro, setErro ] = useState( false );
     const navigate = useNavigate();
 
-/* No useEffect é utilizado para toda vez que o sistema for atualizado no sistema*/
     useEffect( () => {
 
         if( login ) {
-            localStorage.setItem( "usuario" , JSON.stringify( {email: email } ) );
             setEmail( "" );
             setSenha( "" );
             navigate( "/" );
@@ -43,8 +41,12 @@ function Autenticar( evento )
     .then( (json) => { 
 
         if( json.user ) {
+            localStorage.setItem( "usuario" , JSON.stringify( json.user._id ) );
             setLogin( true );
+            setErro( false );
         } else {
+            localStorage.removeItem( "usuario" );
+            setLogin( false );
             setErro( true );
         }
     } )
@@ -93,7 +95,7 @@ function Autenticar( evento )
                     <Grid item xs>
                         Esqueci a senha
                     </Grid>
-                    <Button href='cadastro' >Cadastrar</Button>
+                    <Button href='cadastro'>Cadastrar</Button>
                 </Grid>
             </Box>
         </Box>    

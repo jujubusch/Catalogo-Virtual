@@ -1,6 +1,8 @@
-import { Alert, Button, Box, Container, TextField, Typography } from '@mui/material'
+import { Alert, Button, Box, Container, TextField, Typography, AppBar } from '@mui/material'
 import React from 'react'
 import { useState, useEffect } from 'react';
+import MenuResponsivo from './MenuResponsivo';
+import "./global.css"
 
 function Cadastro() {
     
@@ -15,7 +17,7 @@ function Cadastro() {
     function Cadastrar( evento ) {
 
         evento.preventDefault();
-        fetch( process.env.REACT_APP_BACKEND + "users", {
+        fetch( process.env.REACT_APP_BACKEND + "usuarios", {
         method:"POST",
         headers: {
             'Content-Type': 'application/json'
@@ -116,6 +118,7 @@ function Cadastro() {
                 onChange={ (e) => setCpf( e.target.value ) }
                 fullWidth/>
                 <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Enviar</Button>
+                <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }href="login">Já tem conta? Faça seu login</Button>
             </Box>
         </Box>
         </Container>

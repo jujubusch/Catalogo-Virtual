@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography,Rating } from '@mui/material';
+import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
@@ -15,7 +15,8 @@ function EditaProdutos() {
     const [editarProdutos, setEditarProdutos] = useState(false);
 
     useEffect( () => {
-        fetch( process.env.REACT_APP_BACKEND + "editar/" + id, {
+        const usuario = localStorage.getItem( "usuario" );
+        fetch( process.env.REACT_APP_BACKEND + "produtos/" + usuario + "/" + id, {
             method:"GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -25,9 +26,9 @@ function EditaProdutos() {
         .then( (json) => { 
 
             if( !json.status ) {
-                setNome( json.nome );
+                setNome( json.titulo );
                 setDescricao( json.descricao );
-                setTipo( json.tipo );
+                setTipo( json.ano );
                 setColecao( json.colecao );
                 setImagem( json.imagem );
             } else {
@@ -39,7 +40,7 @@ function EditaProdutos() {
 
     function Editar( evento ) {
         evento.preventDefault();
-        fetch( process.env.REACT_APP_BACKEND + "editar", {
+        fetch( process.env.REACT_APP_BACKEND + "produtos", {
             method:"PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -47,11 +48,13 @@ function EditaProdutos() {
             body: JSON.stringify(
                 {
                     id: id,
-                    nome: nome,
+                    titulo: nome,
                     descricao: descricao,
-                    tipo: tipo,
-                    colecao: colecao,
-                    imagem: imagem                    
+                    ano: tipo,
+                    duracao: colecao,
+                    imagem: imagem,
+                    categoria: "",
+                    usuario: localStorage.getItem( "usuario" )                    
                 }
             ) 
         } )
@@ -104,23 +107,15 @@ function EditaProdutos() {
                         onChange={(e) => setDescricao(e.target.value)}
                         fullWidth
                     />
-                        <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Tipos</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={tipo}
-                            label="Age"
-                        >
-                        <MenuItem value={1}>Brilho Labial</MenuItem>
-                        <MenuItem value={2}>Blush</MenuItem>
-                        <MenuItem value={3}>Sombra</MenuItem>
-                        <MenuItem value={3}>Delineador</MenuItem>
-                        <MenuItem value={3}>Primer</MenuItem>
-                        <MenuItem value={3}>Outros...</MenuItem>
-                    </Select>
-                    </FormControl>
-
+                    <TextField
+                        type="text"
+                        label="Tipo"
+                        variant="filled"
+                        margin="normal"
+                        value={tipo}
+                        onChange={(e) => setTipo(e.target.value)}
+                        fullWidth
+                    />
                     <TextField
                         type="text"
                         label="Coleção"
@@ -140,6 +135,7 @@ function EditaProdutos() {
                         fullWidth
                     />
                     <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 2 }}>Editar</Button>
+                    <Button type="submit" variant="contained" fullWidth href="/" sx={{ mt: 2, mb: 2 }}>Voltar para página inicial</Button>
                 </Box>
             </Box>
         </Container>

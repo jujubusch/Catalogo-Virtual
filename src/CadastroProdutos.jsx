@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Rating } from '@mui/material';
+import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useState, useEffect } from 'react';
 
@@ -22,11 +22,13 @@ function CadastroProdutos() {
         },
         body: JSON.stringify(
             {
-                nome: nome,
+                titulo: nome,
                 descricao: descricao,
-                tipo: tipo,
-                colecao: colecao,
-                imagem: imagem
+                ano: tipo,
+                duracao: colecao,
+                imagem: imagem,
+                categoria: "",
+                usuario: localStorage.getItem( "usuario" )
                 
             }
         ) 
@@ -91,23 +93,15 @@ function CadastroProdutos() {
             onChange={ (e) => setDescricao( e.target.value ) }
             fullWidth
             />
-            <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Tipos*</InputLabel>
-            <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={tipo}
-                    label="Age"
-                >
-                <MenuItem value={1}>Brilho Labial</MenuItem>
-                <MenuItem value={2}>Blush</MenuItem>
-                <MenuItem value={3}>Sombra</MenuItem>
-                <MenuItem value={3}>Delineador</MenuItem>
-                <MenuItem value={3}>Primer</MenuItem>
-                <MenuItem value={3}>Outros...</MenuItem>
-            </Select>
-            </FormControl>
-            
+            <TextField 
+            type="text"
+            label="Tipo*" 
+            variant="filled" 
+            margin="normal" 
+            value={tipo}
+            onChange={ (e) => setTipo( e.target.value ) }
+            fullWidth
+            />
             <TextField 
             type="text"
             label="Coleção*" 
@@ -126,7 +120,8 @@ function CadastroProdutos() {
             onChange={ (e) => setImagem( e.target.value ) }
             fullWidth
             />
-            <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Editar</Button>
+            <Button type="submit" variant="contained" fullWidth sx={ { mt: 2, mb: 2 } }>Cadastrar Produto</Button>
+            <Button type="submit" variant="contained" fullWidth href='/' sx={ { mt: 2, mb: 2 } }>Ir para página inicial</Button>
         </Box>
     </Box>
    </Container>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Menu from "./components/Menu"
+import Filme from "./components/Filme"
 import { Container } from "@mui/material";
 import MenuResponsivo from "./MenuResponsivo";
 import "./global.css";
@@ -7,39 +7,41 @@ import "./global.css";
 
 function App() {
 
-  const[ menu, setMenu ] = useState();
+  const[ produtos, setProdutos ] = useState();
   const[ erro, setErro ] = useState();
-  const[ filmes, setFilmes] =useState();
 
-
+/*127.0.0.1:3000*/
   useEffect( () => {
 
-    fetch( process.env.REACT_APP_BACKEND + "menus", {
+    const usuario = localStorage.getItem( "usuario" ) ;
+
+    fetch( process.env.REACT_APP_BACKEND + "produtos/" + usuario , {
       headers: {
         "Content-Type": "application/json"
       }
     } )
     .then( ( resposta) => resposta.json() )
-    .then( ( json ) => setMenu( json ) )
+    .then( ( json ) => setProdutos( json ) )
     .catch( ( erro ) => setErro( true ) )
 
   }, [] )
 
 function Excluir( evento, id ) {
   evento.preventDefault();
-    fetch( process.env.REACT_APP_BACKEND + "menus", {
+    fetch( process.env.REACT_APP_BACKEND + "produtos", {
         method:"DELETE",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: id
+            id: id,
+            usuario: localStorage.getItem( "usuario" )
         }) 
     } )
     .then( (resposta) => resposta.json() )
     .then( (json) => { 
-      const novaLista = menu.filter( ( menu ) => menu._id !== id );
-      setMenu( novaLista );
+      const novaLista = produtos.filter( ( menu ) => menu._id !== id );
+      setProdutos( novaLista );
     } )
     .catch( ( erro ) => { setErro( true ) } )
 }
@@ -54,6 +56,18 @@ function Excluir( evento, id ) {
         flexWrap: "wrap", 
         gap: "2rem"
     }}>
+      { produtos && (
+         produtos.map( ( produto, index ) => (
+        <Filme 
+          titulo={produto.nome}
+          imagem={produto.imagem}
+          decricao={produto.descricao}
+          ano={produto.tipo}
+          categoria={produto.colecao}
+          excluir={ (e) => Excluir( e, produto._id ) }
+          id={produto._id}
+          />
+      ) ) ) }
       
     </Container>
     </>

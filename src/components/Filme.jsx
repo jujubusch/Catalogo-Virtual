@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography, Link, Rating } from '@mui/material'
+import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography, Link, Rating, Button } from '@mui/material'
 import React, { useState } from 'react'
 
 
@@ -33,7 +33,7 @@ function Filme( props ) {
                         <button onClick={props.excluir}>X</button>
                     </Grid>
                     <Grid item xs={3}>
-                        <Link href={ "editar/" }>Editar</Link>
+                        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, mb: 2 }} href={ "editar/" + props.id }>Editar</Button>
                     </Grid>
                     <Typography component="legend">Avaliar</Typography>
                     <Rating

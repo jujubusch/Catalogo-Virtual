@@ -34,32 +34,61 @@ function MenuResponsivo() {
                 href="/"
                 sx={{
                   mr: 2,
-                  display: { md: 'flex' },
+                  display: { md: 'flex', xs: 'none' },
                   fontFamily: 'serif',
                   fontWeight: 700,
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
-                  fontSize: '35px',
-                  mt: '15px',
+                  height: '100px',
                 }}
                 >
                 <Avatar alt="Sheglam" 
                   src="https://d15d3imw3mjndz.cloudfront.net/5ompw27pxt0vgh6cpcgn47tvnfjo"  
                   sx={{
-                    width: '80px',
-                    height: '90px'
+                    width: '20px',
+                    height: '50px'
                     }}/>
                  Sheglam
-                 <div className='Login'>
-                  <Button href="login">Login</Button>
-                </div>
-                <div className='cadastrar'>
-                  <Button href="Produtos">Cadastro de Produtos</Button>
-                </div>
-                <div className='Lprodutos'>
-                  <Button href="Produtos">Cadastro de Produtos</Button>
-                </div>
+                  <Button 
+                  href="login" 
+                  sx={{
+                    my: 2, 
+                    color: 'white', 
+                    display: 'block',
+                    ml: 20
+                  }}>
+                  Login
+                  </Button>
+                  <Button 
+                  href="Produtos"
+                  sx={{
+                    my: 2, 
+                    color: 'white', 
+                    display: 'block',
+                    ml: 20
+                  }}>
+                  Cadastro de Produtos
+                  </Button>
+                  <Button  
+                  href="https://br.shein.com/pdsearch/sheglam/?ici=s1`RecentSearch`sheglam`_fb`d0`PageHome&search_source=1&search_type=all&src_identifier=st%3D5%60sc%3Dsheglam%60sr%3D0%60ps%3D1&src_module=search&src_tab_page_id=page_home1695211555814"
+                  sx={{
+                    my: 2, 
+                    color: 'white', 
+                    display: 'block',
+                    ml: 20
+                  }}>
+                  Mais produtos da nossa marca
+                  </Button>
+                    <Avatar 
+                      sx={{ 
+                      bgcolor: '#F0DDD5',
+                      color: 'black',
+                      my: 1,
+                      ml: 23
+                      }}>
+                    AB
+                    </Avatar>
                 </Typography>
 
                 <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
